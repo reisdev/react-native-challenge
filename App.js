@@ -2,40 +2,28 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { Header } from 'react-native-elements';
-
-import Coins from './src/coins';
+import Router from "./router";
 
 export default class App extends React.Component {
-  headerProps = {
-    leftComponent: {
-      icon: "menu",
-      color: "#ffff"
-    },
-    centerComponent: {
-      text: "React-native App",
-      style: {
-        color: "#ffff",
-        fontSize: 20
-      }
-    },
-    statusBarProps: { barStyle: 'light-content' },
-    style: styles.header
-  }
   render() {
     return (
-      <View style={styles.container}>
-        <Header {...this.headerProps}></Header>
-        <Coins/>
-      </View>
+        <Router/>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "stretch",
+    backgroundColor: "black",
   },
   header: {
-    marginTop: "30px"
+    flex:1
+  },
+  router: {
+    flex:1,
+    zIndex:2
   }
 });
