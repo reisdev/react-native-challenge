@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, FlatList, Text, StyleSheet, Linking} from "react-native";
+import { View, FlatList, Text, Linking, RefreshControl } from "react-native";
 import { Card } from "react-native-elements";
 
 class Coin extends Component {
@@ -20,31 +20,46 @@ class Coin extends Component {
 export default class Coins extends Component {
     state={
         coins: [
-        ]
+            { 
+                nome: "Moeda X",
+                coin: "YYY",
+                valor: 0.0,
+                fonte: "Google - http://google.com"
+            }
+        ],
+        refreshing: true
     }
     async componentDidMount(){
+        this.request()
+    }
+    request = async () => {
         let resp = await fetch("https://api.promasters.net.br/cotacao/v1/valores")
         resp = await resp.json();
-        this.setState({coins: await resp.valores})
+        this.setState({coins: await resp.valores, refreshing: false})
+    }
+    _refresh = () => {
+        this.setState({refreshing: true, coins: [{ 
+            nome: "Moeda X",
+            coin: "YYY",
+            valor: 0.0,
+            fonte: "Google - http://google.com"
+        }]})
+        this.request()
     }
     render(){
-        return <View  style={styles.container}  >
-                    <FlatList
-                        data={
-                            Object.keys(this.state.coins).map((item,index) => {
-                            return { key: item, ...this.state.coins[item] }
-                        })}
-                        renderItem={({item}) => {
-                            return <Coin key={item.key} {...item} coin={item.key}/>
-                        }}
-                    >   
-                    </FlatList>
+        return <View>
+                <FlatList
+                    data={
+                        Object.keys(this.state.coins).map((item,index) => {
+                        return { key: item, ...this.state.coins[item] }
+                    })}
+                    renderItem={({item}) => {
+                        return <Coin key={item.key} {...item} coin={item.key}/>
+                    }}
+                    refreshControl={<RefreshControl refreshing={this.state.refreshing}
+                        onRefresh={this._refresh}/>}
+                > 
+                </FlatList>
             </View>
     }
 }
-
-const styles= StyleSheet.create({
-    container: {
-        flex: 1
-    }
-})

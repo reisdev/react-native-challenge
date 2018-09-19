@@ -5,14 +5,15 @@ import { View, Text, StyleSheet } from "react-native";
 export default class Error404 extends Component {
     render(){
         return <View style={styles.error}>
-            <Text> Nothing was found with this route</Text>
+            <Text color="blue"> Nenhuma rota encontrada</Text>
         </View>
     }
 }
 
-const styles= {
+const styles= StyleSheet.create({
     error: {
         padding: 20,
-        color: "blue"
+        alignItems: "center",
+        justifyContent: "center"
     }
-}
+})
