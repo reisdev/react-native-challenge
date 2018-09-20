@@ -5,6 +5,7 @@ import { Header } from "react-native-elements"
 
 import Coins from '../src/coins';
 import Error404 from '../src/pages/error';
+import TodoList from '../src/components/todo';
 
 const headerProps = {
     leftComponent: {
@@ -25,6 +26,9 @@ const routes = {
     "Home": { 
         screen: Coins
     },
+    "Todo": {
+        screen: TodoList
+    },
     "404": {
         screen: Error404
     }
@@ -36,6 +40,5 @@ const router = createStackNavigator(routes,{
     },
     initialRouteName: "Home",
     animationEnabled: true,
-    
 })
 export default router
