@@ -3,11 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { Header } from 'react-native-elements';
 import Router from "./router";
+import { FooterBar} from "./src/components/bar"
 
 export default class App extends React.Component {
   render() {
     return (
-        <Router/>
+        <View style={styles.container}>
+          <FooterBar/>
+        </View>
     );
   }
 }

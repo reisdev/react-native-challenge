@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { createStackNavigator } from "react-navigation";
 import { Header } from "react-native-elements"
+import { FooterBar } from "../src/components/bar"
 
 import Coins from '../src/coins';
 import Error404 from '../src/pages/error';
@@ -36,7 +37,7 @@ const routes = {
 
 const router = createStackNavigator(routes,{
     navigationOptions: {
-        header: <Header {...headerProps}></Header>
+        header: <FooterBar/>
     },
     initialRouteName: "Home",
     animationEnabled: true,
